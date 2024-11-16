@@ -33,10 +33,12 @@ public class MessageService {
         return messageRepository.getById(id);
     }
 
-    public Message deleteMessage(Integer messageId){
-        Message deletedMessage = messageRepository.getById(messageId);
-        messageRepository.deleteById(messageId);
-        return deletedMessage;
+    public Integer deleteMessage(Integer messageId){
+        if(messageRepository.findById(messageId).isPresent()){
+            messageRepository.deleteById(messageId);
+            return 1;
+        }
+        return null;
     }
 
     public Message updateMessage(Message message, long messageId){
