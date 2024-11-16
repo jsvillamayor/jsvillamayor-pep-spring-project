@@ -3,7 +3,6 @@ package com.example.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,25 +35,25 @@ public class SocialMediaController {
         this.messageService = messageService;
     }
 
-    @PostMapping(value = "/register/")
+    @PostMapping(value = "/register")
     @ResponseBody
     public Account addAccount(@RequestBody Account account){
         return accountService.addAccount(account);
     }
 
-    @PostMapping(value = "/login/")
+    @PostMapping(value = "/login")
     @ResponseBody
     public Account verifyAccount(@RequestBody Account account){
         return accountService.verifyAccount(account);
     }
 
-    @PostMapping(value = "/messages/")
+    @PostMapping(value = "/messages")
     @ResponseBody
     public Message addMessage(@RequestBody Message message){
         return messageService.addMessage(message);
     }
 
-    @GetMapping(value = "/messages/")
+    @GetMapping(value = "/messages")
     public List<Message> getAllMessages(){
         return messageService.getAllMessages();
     }
