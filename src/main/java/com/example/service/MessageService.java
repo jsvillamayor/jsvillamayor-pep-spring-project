@@ -30,7 +30,7 @@ public class MessageService {
     }
 
     public Message getMessageById(Integer id){
-        return messageRepository.getById(id);
+        return messageRepository.findMessageByMessageId(id);
     }
 
     public Integer deleteMessage(Integer messageId){
@@ -41,8 +41,13 @@ public class MessageService {
         return null;
     }
 
-    public Message updateMessage(Message message, long messageId){
-        return messageRepository.save(message);
+    public Integer updateMessage(Message message, long messageId){
+        messageRepository.save(message);
+        return 1;
+    }
+
+    public boolean messageExists(Integer messageId){
+        return messageRepository.existsById(messageId);
     }
 
     public List<Message> getMessagesByUser(Integer accountId){
