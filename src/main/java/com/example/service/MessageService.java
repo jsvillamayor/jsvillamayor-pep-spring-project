@@ -29,11 +29,11 @@ public class MessageService {
         return messageRepository.findAll();
     }
 
-    public Message getMessageById(long id){
+    public Message getMessageById(Integer id){
         return messageRepository.getById(id);
     }
 
-    public Message deleteMessage(long messageId){
+    public Message deleteMessage(Integer messageId){
         Message deletedMessage = messageRepository.getById(messageId);
         messageRepository.deleteById(messageId);
         return deletedMessage;
@@ -43,7 +43,7 @@ public class MessageService {
         return messageRepository.save(message);
     }
 
-    public List<Message> getMessagesByUser(long accountId){
+    public List<Message> getMessagesByUser(Integer accountId){
         return messageRepository.findMessagesByPostedBy(accountId);
     }
 

@@ -8,8 +8,8 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.entity.Message;
 
-public interface MessageRepository extends JpaRepository<Message, Long>{
+public interface MessageRepository extends JpaRepository<Message, Integer>{
 
-    List<Message> findMessagesByPostedBy(Long accountId);
+    List<Message> findMessagesByPostedBy(Integer accountId);
 
 }

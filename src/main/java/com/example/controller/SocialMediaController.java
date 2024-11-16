@@ -3,6 +3,7 @@ package com.example.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,8 +38,11 @@ public class SocialMediaController {
 
     @PostMapping(value = "/register")
     @ResponseBody
-    public Account addAccount(@RequestBody Account account){
-        return accountService.addAccount(account);
+    public ResponseEntity<Account> addAccount(@RequestBody Account account){
+        if(account.getUsername().isBlank() || account.getUsername().length() < 5){
+            return ResponseEntity.status(400).body(null);
+        }
+        return ResponseEntity.status(200).body(accountService.addAccount(account));
     }
 
     @PostMapping(value = "/login")
@@ -59,17 +63,17 @@ public class SocialMediaController {
     }
 
     @DeleteMapping(value = "/messages/{messageId}")
-    public Message deleteMessage(@PathVariable long messageId){
+    public Message deleteMessage(@PathVariable Integer messageId){
         return messageService.deleteMessage(messageId);
     }
 
     @PutMapping(value = "/messages/{messageId}")
-    public Message updateMessage(@RequestBody Message message, @PathVariable long messageId){
+    public Message updateMessage(@RequestBody Message message, @PathVariable Integer messageId){
         return messageService.updateMessage(message, messageId);
     }
 
     @GetMapping(value = "/accounts/{accountId}/messages")
-    public List<Message> getMessagesByUserId(@PathVariable long accountId){
+    public List<Message> getMessagesByUserId(@PathVariable Integer accountId){
         return messageService.getMessagesByUser(accountId);
     }
 
