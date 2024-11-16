@@ -18,6 +18,14 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
+    public boolean checkAccount(Integer accountId){
+        return accountRepository.existsByAccountId(accountId);
+    }
+
+    public boolean checkDuplication(Account account){
+        return accountRepository.existsByUsername(account.getUsername());
+    }
+
     public Account addAccount(Account account){
         return accountRepository.save(account);
     }
